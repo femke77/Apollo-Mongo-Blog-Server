@@ -4,6 +4,7 @@ import { expressMiddleware } from "@apollo/server/express4";
 import { authenticateToken } from "./utils/auth.js";
 import { typeDefs, resolvers } from "./schemas/index.js";
 import db from "./config/connection.js";
+import cors from "cors";
 // import { fileURLToPath } from "node:url";
 // import path from "node:path";
 // const __filename = fileURLToPath(import.meta.url);
@@ -23,6 +24,11 @@ const startApolloServer = async () => {
   await db;
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
+  app.use(cors({
+    origin: ["http://localhost:3000"], // TODO replace with correct domain 
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true 
+  }));
 
   app.use(
     "/graphql",

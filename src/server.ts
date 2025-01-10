@@ -25,7 +25,7 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cors({
-    origin: ["http://localhost:3000"], // TODO replace with correct domain 
+    origin: ["https://apollo-mongo-blogging.netlify.app/"], 
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true 
   }));

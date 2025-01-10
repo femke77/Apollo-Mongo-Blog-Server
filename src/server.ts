@@ -25,11 +25,12 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cors({
-    origin: ["https://apollo-mongo-blogging.netlify.app/"], 
+    origin: ["https://apollo-mongo-blogging.netlify.app", "http://localhost:3000"], 
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true 
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"]
   }));
-
+  app.options("*", cors()); //preflight
   app.use(
     "/graphql",
     expressMiddleware(server as any, {
